@@ -1,0 +1,232 @@
+:root {
+    --primary-bg-gradient-start: #E0F5FF;
+    --primary-bg-gradient-end: #4086E0;
+    --robot-bg: #F7F7F7;
+    --robot-shadow1: rgba(0, 0, 0, 0.2);
+    --robot-shadow2: rgba(0, 0, 0, 0.1);
+    --mouth-border: #4086E0;
+    --face-bg: #F7F7F7;
+    --face-shadow: rgba(0, 0, 0, 0.2);
+    --eye-bg: #4086E0;
+    --eye-inner-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    --happy-eye-bg: #FFD700;
+    --sad-eye-bg: #555;
+    --angry-eye-bg: #555;
+    --happy-mouth-bg: #FFD700;
+    --angry-mouth-border: #4086E0;
+    --sad-mouth-border: #555;
+    --neutral-eye-bg: #4086E0;
+    --neutral-mouth-border: #4086E0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, var(--primary-bg-gradient-start), var(--primary-bg-gradient-end));
+    flex-direction: column;
+}
+
+.robot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    size: 200px;
+    background: var(--robot-bg);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 0 30px var(--robot-shadow1), 5px 5px 10px var(--robot-shadow2);
+    transform: perspective(1200px) rotateX(25deg) rotateY(10deg);
+}
+
+.mouth {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 0px;
+    border: solid 5px var(--mouth-border);
+    border-radius: 0 0 50% 50%;
+    transition: border 0.8s ease, background-color 0.8s ease;
+}
+
+.face {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.eye-container {
+    width: 175px;
+    height: 150px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    border-radius: 16px;
+    justify-content: center;
+    background-color: #303030;
+    border: 1px solid #505050;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+    background-image: url(noise.png);
+    background-size: cover;
+}
+
+.face {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--face-bg);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px var(--face-shadow);
+}
+
+.eye {
+    width: 50px;
+    height: 50px;
+    background-color: var(--eye-bg);
+    border-radius: 16px;
+    transition: background-color 0.8s ease, border-radius 0.8s ease, transform 0.8s ease;
+    position: relative;
+    box-shadow: var(--eye-inner-shadow);
+}
+
+.happy .eye {
+    border-radius: 50% 50% 10% 10%;
+    background-color: var(--happy-eye-bg);
+}
+
+.eye-container:hover .eye {
+    border-radius: 16px 16px 0 0;
+}
+
+@keyframes scanlines {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100px;
+    }
+}
+
+@keyframes blink {
+    0%, 10% {
+        height: 5px;
+    }
+
+    10%, 100% {
+        height: 0px;
+    }
+}
+
+.antenna {
+    position: absolute;
+    top: -35px;
+    left: 80px;
+    width: 10px;
+    height: 40px;
+    background-color: #AEDFF7;
+    border-radius: 50%;
+}
+
+.sad .left {
+    border-radius: 130% 80% 50% 50%;
+    height: 30px;
+    background-color: var(--sad-eye-bg);
+}
+
+.sad .right {
+    border-radius: 80% 130% 50% 50%;
+    height: 30px;
+    background-color: var(--sad-eye-bg);
+}
+
+.angry .left {
+    border-radius: 80% 180% 80% 80%;
+}
+
+.angry .right {
+    border-radius: 180% 80% 80% 80%;
+}
+
+.happy-mouth {
+    background-color: var(--happy-mouth-bg);
+    height: 15px;
+    border-radius: 0% 0% 50% 50%;
+}
+
+.angry .mouth {
+    rotate: 5deg;
+    bottom: 50px;
+    border-color: var(--angry-mouth-border) transparent transparent transparent;
+    border-radius: 30% 30% 0 0;
+}
+
+.sad .mouth {
+    bottom: 50px;
+    border: solid 5px var(--sad-mouth-border);
+    border-color: var(--sad-mouth-border) transparent transparent transparent;
+    border-radius: 50% 50% 0 0;
+}
+
+.happy .mouth {
+    border: solid 10px var(--happy-mouth-bg);
+    border-color: transparent transparent var(--happy-mouth-bg) transparent;
+    border-radius: 0 0 50% 50%;
+}
+
+/* Add transitions for smooth changes */
+.face {
+    transition: background 0.8s ease, transform 0.8s ease;
+}
+
+.eye {
+    transition: background-color 0.8s ease, border-radius 0.8s ease, transform 0.8s ease;
+}
+
+.mouth {
+    transition: border 0.8s ease, background-color 0.8s ease;
+}
+
+/* Additional emotions */
+.surprised .eye {
+    border-radius: 50%;
+    background-color: var(--eye-bg);
+}
+
+.surprised .mouth {
+    border: solid 10px var(--eye-bg);
+    border-radius: 100%;
+}
+
+.confused .eye {
+    background-color: var(--eye-bg);
+}
+
+.confused .mouth {
+    border: solid 13px var(--eye-bg);
+    border-color: var(--eye-bg) transparent transparent transparent;
+    border-radius: 150% 150% 0 0;
+}
+
+.neutral .eye {
+    background-color: var(--eye-bg);
+}
+
+.neutral .mouth {
+    border: solid 5px var(--eye-bg);
+    border-color: transparent transparent transparent transparent;
+    border-radius: 0;
+}
+
+.emotionInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
